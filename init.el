@@ -127,8 +127,14 @@
 ;; multi-translate
 (add-to-list 'load-path "~/.emacs.d/github-plugins/multi-translate.el")
 (require 'multi-translate)
-(global-set-key (kbd "s-b q") 'multi-translate)
-(global-set-key (kbd "s-b b") 'bing-dict-brief)
+(global-set-key (kbd "s-b q q") 'multi-translate)
+(global-set-key (kbd "s-b q a") 'multi-translate-at-point)
+(global-set-key (kbd "s-b b b") 'bing-dict-brief)
+(global-set-key (kbd "s-b s q") 'sdcv-search-input+)
+(global-set-key (kbd "s-b s Q") 'sdcv-search-input)
+(global-set-key (kbd "s-b s a") 'sdcv-search-pointer+)
+(global-set-key (kbd "s-b s A") 'sdcv-search-pointer)
+(global-set-key (kbd "s-b B s") 'helm-baidu-fanyi-suggest)
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -160,7 +166,7 @@
 (use-package helm-posframe
   :ensure t
   :config
-  (helm-posframe-enable))
+  (helm-posframe-disable))
 
 (setq make-backup-files nil)
 
@@ -178,7 +184,7 @@
  '(helm-completion-style 'emacs)
  '(initial-frame-alist '((fullscreen . maximized)))
  '(package-selected-packages
-   '(helm-posframe posframe quelpa-use-package flycheck-pos-tip flycheck imenu-anywhere dired-imenu discover-my-major srcery-theme go-impl helm-lsp flycheck-golangci-lint gotest yasnippet-snippets helm-rg helm-ag helm-projectile projectile helm doom-themes spacemacs-theme ivy solarized-theme magit exec-path-from-shell evil evil-mode go-mode yasnippet use-package lsp-ui company)))
+   '(evil-surround expand-region goldendict helm-posframe posframe quelpa-use-package flycheck-pos-tip flycheck imenu-anywhere dired-imenu discover-my-major srcery-theme go-impl helm-lsp flycheck-golangci-lint gotest yasnippet-snippets helm-rg helm-ag helm-projectile projectile helm doom-themes spacemacs-theme ivy solarized-theme magit exec-path-from-shell evil evil-mode go-mode yasnippet use-package lsp-ui company)))
  ;; Start maximized
 
 (custom-set-faces
@@ -187,3 +193,85 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(use-package expand-region
+  :ensure t
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+;; helm baidu fanyi suggest fetch
+(require 'helm)
+
+(defun helm-baidu-fanyi-suggest-fetch (keyword)
+  (let ((url-user-agent (format "%s <%s>" user-full-name user-mail-address))
+        (url-request-method "POST")
+        (url-request-extra-headers '(("Content-Type" . "application/x-www-form-urlencoded")))
+        (url-request-data (encode-coding-string
+                           (mapconcat
+                            (pcase-lambda (`(,key . ,val))
+                              (concat (url-hexify-string key)
+                                      "="
+                                      (url-hexify-string val)))
+                            (list (cons "kw" keyword))
+                            "&")
+                           'utf-8)))
+    (with-current-buffer (url-retrieve-synchronously "https://fanyi.baidu.com/sug")
+      ;; 百度使用 \uxxxx，而不是 UTF-8
+      ;; http://softwaremaniacs.org/blog/2015/03/22/json-encoding-problem/en/
+      ;; (set-buffer-multibyte t)
+      (goto-char url-http-end-of-headers)
+      (let ((json (let ((json-array-type 'list))
+                    (json-read))))
+        (mapcar
+         (lambda (x)
+           (let-alist x
+             (cons .k .v)))
+         (alist-get 'data json))))))
+
+(defun helm-baidu-fanyi-suggest-candidates (&optional keyword)
+  (mapcar
+   (pcase-lambda (`(,word . ,meaning))
+     (format "%-20s %s" word
+             ;; 有时开头会有空格
+             (string-trim meaning)))
+   (helm-baidu-fanyi-suggest-fetch (or keyword helm-pattern))))
+
+(defvar helm-baidu-fanyi-suggest-action
+  (helm-make-actions
+   "Insert Query"
+   (lambda (candidate)
+     ;; NOTE 单词和解释之间至少间隔 2 个空格
+     (insert (car (split-string candidate "  " t))))
+   "Browse URL"
+   (lambda (candidate)
+     (let* ((query (car (split-string candidate "  " t)))
+            ;; NOTE 只考虑中文 ⇔ 英文
+            ;; https://fanyi.baidu.com/#en/zh/aggressive
+            ;; https://fanyi.baidu.com/#zh/en/%E4%B8%AD%E5%9B%BD
+            (from (if (string-match-p "\\cC" query) 'zh 'en))
+            (to (pcase from
+                  ('zh 'en)
+                  ('en 'zh))))
+       (browse-url
+        (format "https://fanyi.baidu.com/#%s/%s/%s"
+                from to (url-hexify-string query)))))))
+
+(defun helm-baidu-fanyi-suggest ()
+  "百度翻译（搜索补全）."
+  (interactive)
+  (helm
+   :sources
+   (helm-build-sync-source "百度翻译"
+     :header-name
+     (lambda (name)
+       (format "%s <%s>" name "https://fanyi.baidu.com/"))
+     :candidates #'helm-baidu-fanyi-suggest-candidates
+     :action helm-baidu-fanyi-suggest-action
+     :volatile t
+     :requires-pattern 1)
+   :buffer "*helm 百度翻译*"))
