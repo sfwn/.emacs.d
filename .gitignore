@@ -14,3 +14,4 @@ url
 network-security.data
 bookmarks
 .cache
+flycheck_init.el
