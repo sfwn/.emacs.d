@@ -84,6 +84,9 @@
   (evil-leader/set-key
 	"e i" 'er-find-user-init-file-in-window
 	"e I" 'er-find-user-init-file-in-frame)
+  ;; treemacs
+  (evil-leader/set-key
+	"t r" 'treemacs)
 )
 
 (defun er-find-user-init-file-in-window ()
@@ -207,7 +210,7 @@
   :ensure t)
 
 ;; no wrap; tab width=4
-(set-default 'truncate-lines t)
+;;(set-default 'truncate-lines t)
 (setq-default tab-width 4)
 
 ;; go-impl
@@ -234,6 +237,40 @@
   :config
   (which-key-mode))
 
+(use-package expand-region
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+;; stop creating those #auto-save# files
+(setq auto-save-default nil)
+;; disable emacs's automatic backup~ file
+(setq make-backup-files nil)
+
+(use-package treemacs
+  :ensure t
+  :config
+  (treemacs-git-mode 'deferred)
+
+(use-package treemacs-evil
+  :ensure t
+  :after treemacs evil)
+
+(use-package treemacs-projectile
+  :ensure t
+  :after treemacs projectile)
+
+
+(use-package treemacs-magit
+  :ensure t
+  :after treemacs magit)
+
+(use-package treemacs-icons-dired
+  :ensure t
+  :after treemacs dired
+  :config (treemacs-icons-dired-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -246,8 +283,12 @@
  '(helm-completion-style 'emacs)
  '(initial-frame-alist '((fullscreen . maximized)))
  '(package-selected-packages
-   '(neotree jbeans-theme flycheck-color-mode-line which-key evil-leader rainbow-delimiters-mode rainbow-delimiters flycheck-golangci-lint flycheck yaml-mode evil-surround expand-region goldendict helm-posframe posframe quelpa-use-package imenu-anywhere dired-imenu discover-my-major srcery-theme go-impl helm-lsp gotest yasnippet-snippets helm-rg helm-ag helm-projectile projectile helm doom-themes spacemacs-theme ivy solarized-theme magit exec-path-from-shell evil evil-mode go-mode yasnippet use-package lsp-ui company))
+   '(treemacs-icons-dired treemacs-magit dockerfile-mode treemacs-evil treemacs-projectile treemacs neotree jbeans-theme flycheck-color-mode-line which-key evil-leader rainbow-delimiters-mode rainbow-delimiters flycheck-golangci-lint flycheck yaml-mode evil-surround expand-region goldendict helm-posframe posframe quelpa-use-package imenu-anywhere dired-imenu discover-my-major srcery-theme go-impl helm-lsp gotest yasnippet-snippets helm-rg helm-ag helm-projectile projectile helm doom-themes spacemacs-theme ivy solarized-theme magit exec-path-from-shell evil evil-mode go-mode yasnippet use-package lsp-ui company))
  '(tooltip-mode nil)
+ '(treemacs-filewatch-mode t)
+ '(treemacs-follow-mode t)
+ '(treemacs-fringe-indicator-mode t)
+ '(treemacs-tag-follow-mode t)
  '(which-key-mode t))
  ;; Start maximized
 
@@ -257,22 +298,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-(use-package expand-region
-  :ensure t
-  :config
-  (global-set-key (kbd "C-=") 'er/expand-region))
-
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
-
-;; helm baidu fanyi suggest fetch
-(require 'helm)
-
-;; all backups goto ~/.backups instead in the current directory
-(setq backup-directory-alist (quote (("." . "~/.emacs.d/auto-save-backups"))))
 
 (defun helm-baidu-fanyi-suggest-fetch (keyword)
   (let ((url-user-agent (format "%s <%s>" user-full-name user-mail-address))
