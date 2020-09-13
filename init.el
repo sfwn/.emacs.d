@@ -87,6 +87,9 @@
   ;; treemacs
   (evil-leader/set-key
 	"t r" 'treemacs)
+  ;; ace-window
+  (evil-leader/set-key
+	"w" 'ace-window)
 )
 
 (defun er-find-user-init-file-in-window ()
@@ -261,7 +264,6 @@
   :ensure t
   :after treemacs projectile)
 
-
 (use-package treemacs-magit
   :ensure t
   :after treemacs magit)
@@ -270,6 +272,12 @@
   :ensure t
   :after treemacs dired
   :config (treemacs-icons-dired-mode))
+
+(use-package ace-window
+  :ensure t
+  :config
+  ((global-set-key (kbd "M-o RET") 'ace-window))
+  (ace-window-display-mode t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
