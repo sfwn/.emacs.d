@@ -241,7 +241,7 @@
   :config
   (which-key-mode))
 
-(use-package expand-region
+(use-package expand-region)
 (use-package evil-surround
   :ensure t
   :config
@@ -277,7 +277,7 @@
 (use-package ace-window
   :ensure t
   :config
-  ((global-set-key (kbd "M-o RET") 'ace-window))
+  (global-set-key (kbd "M-o RET") 'ace-window)
   (ace-window-display-mode t))
 
 (custom-set-variables
