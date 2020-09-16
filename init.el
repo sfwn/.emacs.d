@@ -161,7 +161,8 @@
 (column-number-mode 1)
 (size-indication-mode 1)
 
-(set-face-attribute 'default nil :height 150)
+(add-to-list 'default-frame-alist '(font . "-*-JetBrains Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
+(set-face-attribute 'default t :font "-*-JetBrains Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 
 (global-hl-line-mode 1)
 
