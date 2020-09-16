@@ -256,6 +256,7 @@
   :ensure t
   :config
   (treemacs-git-mode 'deferred)
+  (setq treemacs-position 'right))
 
 (use-package treemacs-evil
   :ensure t
@@ -279,6 +280,9 @@
   :config
   (global-set-key (kbd "M-o RET") 'ace-window)
   (ace-window-display-mode t))
+
+(use-package json-mode
+  :ensure t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
