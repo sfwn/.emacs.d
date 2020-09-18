@@ -53,7 +53,7 @@
   :ensure t
   :config
   ;; Optionally enable completion-as-you-type behavior.
-  (setq company-idle-delay 0)
+  (setq company-idle-delay 0.25)
   (setq company-minimum-prefix-length 0)
   (global-company-mode 0))
 
@@ -90,6 +90,9 @@
   ;; ace-window
   (evil-leader/set-key
 	"w" 'ace-window)
+  ;; yas-snippet
+  (evil-leader/set-key
+	"y i" 'yas-insert-snippet)
 )
 
 (defun er-find-user-init-file-in-window ()
