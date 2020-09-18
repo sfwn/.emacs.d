@@ -29,10 +29,6 @@
   (setq lsp-enable-file-watchers t)
   (setq lsp-file-watch-threshold 20000))
 
-;; help-lsp
-(use-package helm-lsp
-  :ensure t)
-
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
@@ -135,14 +131,33 @@
   :ensure t
   :hook (go-mode . flycheck-golangci-lint-setup))
 
-;; helm
-(use-package helm
+;; ivy
+(use-package ivy
+  :ensure t
+  :demand
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-count-format "%d/%d ")
+  (setq search-default-mode #'char-fold-to-regexp)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  )
+
+;; lsp-ivy
+(use-package lsp-ivy
   :ensure t
   :config
-  (global-set-key (kbd "M-x") #'helm-M-x)
-  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-  (global-set-key (kbd "C-x C-f") #'helm-find-files)
-  (helm-mode 1))
+  (global-set-key (kbd "s-M-o") 'lsp-ivy-workspace-symbol))
 
 ;; projectile
 (use-package projectile
@@ -152,11 +167,10 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-;; helm-projectile
-(use-package helm-projectile
+(use-package counsel-projectile
   :ensure t
   :config
-  (helm-projectile-on))
+  (counsel-projectile-mode 1))
 
 ;; linum-mode
 (global-linum-mode 1)
@@ -199,7 +213,6 @@
 (global-set-key (kbd "s-b s I") 'sdcv-search-input)
 (global-set-key (kbd "s-b s a") 'sdcv-search-pointer+)
 (global-set-key (kbd "s-b s A") 'sdcv-search-pointer)
-(global-set-key (kbd "s-b B s") 'helm-baidu-fanyi-suggest)
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -227,11 +240,6 @@
 (setq scroll-margin 5
       scroll-conservatively 9999
       scroll-step 1)
-
-(use-package helm-posframe
-  :ensure t
-  :config
-  (helm-posframe-disable))
 
 (setq make-backup-files nil)
 
@@ -292,14 +300,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(counsel-mode t)
  '(custom-safe-themes
    '("f7216d3573e1bd2a2b47a2331f368b45e7b5182ddbe396d02b964b1ea5c5dc27" "a3165cd9923c8a033924ef3a342c4ecc26a4b7f5abdefcfa4c6fb659a4404a09" "3899c0f0c9fa57ace9760821780dfe74b7b43de2ebf1938ff7aa21542461c487" "71e5acf6053215f553036482f3340a5445aee364fb2e292c70d9175fb0cc8af7" "9efb2d10bfb38fe7cd4586afb3e644d082cbcdb7435f3d1e8dd9413cbe5e61fc" "fe00bb593cb7b8c015bb2eafac5bfc82a9b63223fbc2c66eddc75c77ead7c7c1" "be9645aaa8c11f76a10bcf36aaf83f54f4587ced1b9b679b55639c87404e2499" "6b80b5b0762a814c62ce858e9d72745a05dd5fc66f821a1c5023b4f2a76bc910" "e6ff132edb1bfa0645e2ba032c44ce94a3bd3c15e3929cdf6c049802cf059a2a" "8d7684de9abb5a770fbfd72a14506d6b4add9a7d30942c6285f020d41d76e0fa" "830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1" "285d1bf306091644fb49993341e0ad8bafe57130d9981b680c1dbd974475c5c7" "99ea831ca79a916f1bd789de366b639d09811501e8c092c85b2cb7d697777f93" "37144b437478e4c235824f0e94afa740ee2c7d16952e69ac3c5ed4352209eefb" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "7a994c16aa550678846e82edc8c9d6a7d39cc6564baaaacc305a3fdc0bd8725f" "76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" "2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" "5d09b4ad5649fea40249dd937eaaa8f8a229db1cec9a1a0ef0de3ccf63523014" "24714e2cb4a9d6ec1335de295966906474fdb668429549416ed8636196cb1441" "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default))
  '(global-company-mode t)
  '(global-linum-mode t)
- '(helm-completion-style 'emacs)
  '(initial-frame-alist '((fullscreen . maximized)))
+ '(ivy-mode t)
  '(package-selected-packages
-   '(treemacs-icons-dired treemacs-magit dockerfile-mode treemacs-evil treemacs-projectile treemacs neotree jbeans-theme flycheck-color-mode-line which-key evil-leader rainbow-delimiters-mode rainbow-delimiters flycheck-golangci-lint flycheck yaml-mode evil-surround expand-region goldendict helm-posframe posframe quelpa-use-package imenu-anywhere dired-imenu discover-my-major srcery-theme go-impl helm-lsp gotest yasnippet-snippets helm-rg helm-ag helm-projectile projectile helm doom-themes spacemacs-theme ivy solarized-theme magit exec-path-from-shell evil evil-mode go-mode yasnippet use-package lsp-ui company))
+   '(lsp-ivy counsel-projectile counsel treemacs-icons-dired treemacs-magit dockerfile-mode treemacs-evil treemacs-projectile treemacs neotree jbeans-theme flycheck-color-mode-line which-key evil-leader rainbow-delimiters-mode rainbow-delimiters flycheck-golangci-lint flycheck yaml-mode evil-surround expand-region goldendict helm-posframe posframe quelpa-use-package imenu-anywhere dired-imenu discover-my-major srcery-theme go-impl helm-lsp gotest yasnippet-snippets helm-rg helm-ag helm-projectile projectile helm doom-themes spacemacs-theme ivy solarized-theme magit exec-path-from-shell evil evil-mode go-mode yasnippet use-package lsp-ui company))
  '(tooltip-mode nil)
  '(treemacs-filewatch-mode t)
  '(treemacs-follow-mode t)
@@ -315,71 +324,3 @@
  ;; If there is more than one, they won't work right.
  )
 
-(defun helm-baidu-fanyi-suggest-fetch (keyword)
-  (let ((url-user-agent (format "%s <%s>" user-full-name user-mail-address))
-        (url-request-method "POST")
-        (url-request-extra-headers '(("Content-Type" . "application/x-www-form-urlencoded")))
-        (url-request-data (encode-coding-string
-                           (mapconcat
-                            (pcase-lambda (`(,key . ,val))
-                              (concat (url-hexify-string key)
-                                      "="
-                                      (url-hexify-string val)))
-                            (list (cons "kw" keyword))
-                            "&")
-                           'utf-8)))
-    (with-current-buffer (url-retrieve-synchronously "https://fanyi.baidu.com/sug")
-      ;; 百度使用 \uxxxx，而不是 UTF-8
-      ;; http://softwaremaniacs.org/blog/2015/03/22/json-encoding-problem/en/
-      ;; (set-buffer-multibyte t)
-      (goto-char url-http-end-of-headers)
-      (let ((json (let ((json-array-type 'list))
-                    (json-read))))
-        (mapcar
-         (lambda (x)
-           (let-alist x
-             (cons .k .v)))
-         (alist-get 'data json))))))
-
-(defun helm-baidu-fanyi-suggest-candidates (&optional keyword)
-  (mapcar
-   (pcase-lambda (`(,word . ,meaning))
-     (format "%-20s %s" word
-             ;; 有时开头会有空格
-             (string-trim meaning)))
-   (helm-baidu-fanyi-suggest-fetch (or keyword helm-pattern))))
-
-(defvar helm-baidu-fanyi-suggest-action
-  (helm-make-actions
-   "Insert Query"
-   (lambda (candidate)
-     ;; NOTE 单词和解释之间至少间隔 2 个空格
-     (insert (car (split-string candidate "  " t))))
-   "Browse URL"
-   (lambda (candidate)
-     (let* ((query (car (split-string candidate "  " t)))
-            ;; NOTE 只考虑中文 ⇔ 英文
-            ;; https://fanyi.baidu.com/#en/zh/aggressive
-            ;; https://fanyi.baidu.com/#zh/en/%E4%B8%AD%E5%9B%BD
-            (from (if (string-match-p "\\cC" query) 'zh 'en))
-            (to (pcase from
-                  ('zh 'en)
-                  ('en 'zh))))
-       (browse-url
-        (format "https://fanyi.baidu.com/#%s/%s/%s"
-                from to (url-hexify-string query)))))))
-
-(defun helm-baidu-fanyi-suggest ()
-  "百度翻译（搜索补全）."
-  (interactive)
-  (helm
-   :sources
-   (helm-build-sync-source "百度翻译"
-     :header-name
-     (lambda (name)
-       (format "%s <%s>" name "https://fanyi.baidu.com/"))
-     :candidates #'helm-baidu-fanyi-suggest-candidates
-     :action helm-baidu-fanyi-suggest-action
-     :volatile t
-     :requires-pattern 1)
-   :buffer "*helm 百度翻译*"))
