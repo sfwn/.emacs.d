@@ -15,3 +15,5 @@ network-security.data
 bookmarks
 .cache
 flycheck_init.el
+tramp
+custom.el
