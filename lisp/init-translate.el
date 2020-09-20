@@ -15,6 +15,11 @@
 (global-set-key (kbd "s-b s a") 'sdcv-search-pointer+)
 (global-set-key (kbd "s-b s A") 'sdcv-search-pointer)
 
+;; company-english-helper
+(add-to-list 'load-path (expand-file-name "github-plugins/company-english-helper" user-emacs-directory))
+(require 'company-english-helper)
+(global-set-key (kbd "s-b e h") 'toggle-company-english-helper)
+
 (provide 'init-translate)
 
 ;;; init-translate.el ends here

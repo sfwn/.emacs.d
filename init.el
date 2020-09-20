@@ -25,5 +25,6 @@
 (require 'init-treemacs)
 (require 'init-json)
 (require 'init-shell)
+(require 'init-auto-save)
 
 ;;; init.el ends here

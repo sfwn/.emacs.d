@@ -46,8 +46,11 @@
 ;; disable emacs's automatic backup~ file
 (setq make-backup-files nil)
 
-
 (toggle-frame-maximized)
+
+(fset 'yes-or-no-p 'y-or-n-p)
+(blink-cursor-mode -1)
+(setq ring-bell-function 'ignore)
 
 (provide 'init-basic)
 
