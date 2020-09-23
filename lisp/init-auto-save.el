@@ -1,3 +1,7 @@
+;;; init-auto-save.el --- init auto-save
+;;; Commentary:
+;;; Code:
+
 (add-to-list 'load-path (expand-file-name "github-plugins/auto-save" user-emacs-directory))
 (require 'auto-save)
 (auto-save-enable)
@@ -14,3 +18,5 @@
       (file-name-extension (buffer-name)) t))))
 
 (provide 'init-auto-save)
+
+;;; init-auto-save.el ends here

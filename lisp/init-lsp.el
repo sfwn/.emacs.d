@@ -5,7 +5,9 @@
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
-  :hook (go-mode . lsp-deferred)
+  :hook
+  (go-mode . lsp-deferred)
+  ;; (lsp-mode . lsp-enable-which-key-intergration)
   :config
   (setq lsp-enable-file-watchers t)
   (setq lsp-file-watch-threshold 20000))

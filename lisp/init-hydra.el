@@ -10,6 +10,7 @@
    ("j" windmove-down)
    ("k" windmove-up)
    ("l" windmove-right)
+   ("e g" aweshell-dedicated-toggle)
  ))
 
 (provide 'init-hydra)

@@ -47,13 +47,17 @@
 	"e I" 'er-find-user-init-file-in-frame)
   ;; treemacs
   (evil-leader/set-key
-	"t r" 'treemacs)
+	"t r" 'treemacs
+	"t s" 'lsp-treemacs-symbols)
   ;; ace-window
   (evil-leader/set-key
 	"w" 'ace-window)
   ;; yas-snippet
   (evil-leader/set-key
 	"y i" 'yas-insert-snippet)
+  ;; rg
+  (evil-leader/set-key
+	"s" 'counsel-projectile-rg)
 )
 
 (use-package evil-surround

@@ -4,6 +4,7 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
+(require 'cl)
 (require 'init-proxy)					; set proxy firstly
 (require 'init-package)
 (require 'init-custom)
@@ -19,12 +20,13 @@
 (require 'init-snails)
 (require 'init-translate)
 (require 'init-magit)
-(require 'init-whichkey)
+(require 'init-which-key)
 (require 'init-rainbow-delimiters)
 (require 'init-expand-region)
 (require 'init-treemacs)
 (require 'init-json)
 (require 'init-shell)
 (require 'init-auto-save)
+(require 'init-java)
 
 ;;; init.el ends here

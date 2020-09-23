@@ -3,8 +3,7 @@
 ;;; Code:
 
 ;; linum-mode
-(global-linum-mode 1)
-(line-number-mode 1)
+(global-display-line-numbers-mode)
 (column-number-mode 1)
 (size-indication-mode 1)
 
@@ -51,6 +50,8 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (blink-cursor-mode -1)
 (setq ring-bell-function 'ignore)
+
+(setq show-paren-mode 1)
 
 (provide 'init-basic)
 
