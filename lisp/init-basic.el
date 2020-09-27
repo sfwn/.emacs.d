@@ -60,7 +60,7 @@
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 ;; line spacing
-(setq-default line-spacing 0.2)
+(setq-default line-spacing 0.25)
 
 (provide 'init-basic)
 
