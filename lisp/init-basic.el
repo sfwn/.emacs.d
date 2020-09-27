@@ -3,9 +3,12 @@
 ;;; Code:
 
 ;; linum-mode
-(global-display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (column-number-mode 1)
 (size-indication-mode 1)
+
+;; auto pair
+(add-hook 'prog-mode-hook 'electric-pair-mode)
 
 ;; font
 (add-to-list 'default-frame-alist '(font . "-*-JetBrains Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
@@ -52,6 +55,12 @@
 (setq ring-bell-function 'ignore)
 
 (setq show-paren-mode 1)
+
+;; fold
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+
+;; line spacing
+(setq-default line-spacing 0.2)
 
 (provide 'init-basic)
 
