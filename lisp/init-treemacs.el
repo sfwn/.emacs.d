@@ -10,7 +10,7 @@
   (treemacs-follow-mode t)
   (treemacs-fringe-indicator-mode t)
   (treemacs-tag-follow-mode t)
-  (setq treemacs-position 'right))
+  (setq treemacs-position 'left))
 
 (use-package treemacs-evil
   :ensure t

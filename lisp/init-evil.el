@@ -51,13 +51,19 @@
 	"t s" 'lsp-treemacs-symbols)
   ;; ace-window
   (evil-leader/set-key
-	"w" 'ace-window)
+	"w" 'ace-window
+	"W m" 'toggle-frame-maximized
+	"W f" 'toggle-frame-fullscreen)
   ;; yas-snippet
   (evil-leader/set-key
 	"y i" 'yas-insert-snippet)
   ;; rg
   (evil-leader/set-key
 	"s" 'counsel-projectile-rg)
+  ;; magit
+  (evil-leader/set-key
+	"g s" 'magit
+	"g b" 'magit-blame)
 )
 
 (use-package evil-surround

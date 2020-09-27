@@ -2,13 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
 ;; flycheck
 (use-package flycheck
   :ensure t
-  :config (global-flycheck-mode)
+  :config ;; (global-flycheck-mode)
           (add-to-list 'display-buffer-alist
 					   `(,(rx bos "*Flycheck errors*" eos)
 						 (display-buffer-reuse-window

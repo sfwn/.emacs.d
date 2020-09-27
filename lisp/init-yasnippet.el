@@ -5,9 +5,10 @@
 ;; Optional - provides snippet support.
 (use-package yasnippet
   :ensure t
-  :commands yas-minor-mode
   :config
-  (yas-minor-mode 1))
+  (yas-global-mode 1))
+
+;; (add-to-list 'company-backends 'company-yasnippet)
 
 (provide 'init-yasnippet)
 
