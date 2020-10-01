@@ -24,11 +24,6 @@
   :ensure t
   :after treemacs magit)
 
-(use-package treemacs-icons-dired
-  :ensure t
-  :after treemacs dired
-  :config (treemacs-icons-dired-mode))
-
 (provide 'init-treemacs)
 
 ;;; init-treemacs.el ends here

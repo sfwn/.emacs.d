@@ -34,6 +34,7 @@
   (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
   (define-key minibuffer-local-map (kbd "C-M-j") 'ivy-immediate-done)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  (global-set-key (kbd "s-e") 'counsel-recentf)
 )
 
 (use-package counsel-projectile

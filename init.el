@@ -28,5 +28,6 @@
 (require 'init-shell)
 (require 'init-auto-save)
 (require 'init-java)
+(require 'init-icon)
 
 ;;; init.el ends here
