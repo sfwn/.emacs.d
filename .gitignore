@@ -21,3 +21,4 @@ sources
 .dap-breakpoints
 workspace
 eclipse.jdt.ls
+.extension
