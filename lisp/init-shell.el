@@ -10,6 +10,17 @@
 (add-to-list 'load-path (expand-file-name "github-plugins/aweshell" user-emacs-directory))
 (require 'aweshell)
 
+;; vterm
+(use-package vterm
+  :ensure t)
+
+;; multi-vterm
+(use-package multi-vterm
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c v") 'multi-vterm-dedicated-toggle)
+  (global-set-key (kbd "<M-f12>") 'multi-vterm-dedicated-toggle))
+
 (provide 'init-shell)
 
 ;;; init-shell.el ends here
