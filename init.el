@@ -29,5 +29,6 @@
 (require 'init-auto-save)
 (require 'init-java)
 (require 'init-icon)
+(require 'init-sicp)
 
 ;;; init.el ends here
