@@ -7,18 +7,13 @@
 ;;   :config
 ;;   (which-key-mode 1))
 (use-package which-key
+  :ensure t
   :defer nil
   :delight
-  :custom
-  (which-key-idle-delay 0.3)
-  (which-key-popup-type 'side-window)
-  (which-key-side-window-location 'bottom)
-  (which-key-show-docstrings t)
-  (which-key-max-display-columns 1)
-  (which-key-show-prefix nil)
-  (which-key-side-window-max-height 8)
-  (which-key-max-description-length 80)
   :config
+  (which-key-setup-side-window-bottom)
+  (setq which-key-idle-delay 0.3)
+  (setq which-key-side-window-max-height 0.25)
   (which-key-mode t))
 
 (provide 'init-which-key)

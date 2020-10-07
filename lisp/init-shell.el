@@ -18,7 +18,7 @@
 (use-package multi-vterm
   :ensure t
   :config
-  (global-set-key (kbd "C-c v") 'multi-vterm-dedicated-toggle)
+  (global-set-key (kbd "C-c C-v") 'multi-vterm-dedicated-toggle)
   (global-set-key (kbd "<M-f12>") 'multi-vterm-dedicated-toggle))
 
 (provide 'init-shell)
