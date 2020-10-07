@@ -11,8 +11,8 @@
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 
 ;; font
-(add-to-list 'default-frame-alist '(font . "-*-JetBrains Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
-(set-face-attribute 'default t :font "-*-JetBrains Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+(add-to-list 'default-frame-alist '(font . "-*-JetBrains Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1"))
+(set-face-attribute 'default t :font "-*-JetBrains Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
 
 (global-hl-line-mode 1)
 
@@ -54,13 +54,30 @@
 (blink-cursor-mode -1)
 (setq ring-bell-function 'ignore)
 
-(setq show-paren-mode 1)
+(show-paren-mode 1)
 
 ;; fold
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 ;; line spacing
 (setq-default line-spacing 0.25)
+
+(defun scroll-half-page-down ()
+  "scroll down half the page"
+  (interactive)
+  (scroll-down (/ (window-body-height) 2)))
+(defun scroll-half-page-up ()
+  "scroll up half the page"
+  (interactive)
+  (scroll-up (/ (window-body-height) 2)))
+
+(global-set-key "\M-n" 'scroll-half-page-up)
+(global-set-key "\M-p" 'scroll-half-page-down)
+
+(defun say-current-time ()
+  "say current time"
+  (interactive)
+  (insert (shell-command-to-string "echo -n $(date \"+%Y-%m-%d %H:%M:%S\")")))
 
 (provide 'init-basic)
 
