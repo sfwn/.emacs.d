@@ -6,7 +6,7 @@
 (use-package evil
   :ensure t
   :config
-  (evil-mode 1)
+  (evil-mode 0)
   (global-set-key (kbd "<f1>") 'evil-mode))
   (setq evil-emacs-state-cursor '("red" box))
   (setq evil-normal-state-cursor '("green" box))
