@@ -17,6 +17,10 @@
 (use-package go-impl
   :ensure t)
 
+;; go-playground
+(use-package go-playgroud
+  :ensure t)
+
 (provide 'init-go)
 
 ;;; init-go.el ends here
