@@ -18,8 +18,14 @@
   :ensure t)
 
 ;; go-playground
-(use-package go-playgroud
+(use-package go-playground
   :ensure t)
+
+;; go-tag
+(use-package go-tag
+  :ensure t
+  :config
+  (setq go-tag-args (list "-transform" "camelcase")))
 
 (provide 'init-go)
 
