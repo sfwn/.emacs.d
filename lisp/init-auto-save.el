@@ -4,7 +4,6 @@
 
 (add-to-list 'load-path (expand-file-name "github-plugins/auto-save" user-emacs-directory))
 (require 'auto-save)
-(auto-save-enable)
 
 (setq auto-save-silent nil)				; quietly save
 (setq auto-save-delete-trailing-whitespace t) ; automatically delete spaces at the end of the line when saving
@@ -17,6 +16,8 @@
       (string-suffix-p
       "gpg"
       (file-name-extension (buffer-name)) t))))
+
+(auto-save-enable)
 
 (provide 'init-auto-save)
 
