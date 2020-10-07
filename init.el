@@ -30,5 +30,8 @@
 (require 'init-java)
 (require 'init-icon)
 (require 'init-sicp)
+(require 'init-org)
+(require 'init-avy)
+(require 'init-auto-read-only)
 
 ;;; init.el ends here
