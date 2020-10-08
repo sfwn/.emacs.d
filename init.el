@@ -33,5 +33,6 @@
 (require 'init-org)
 (require 'init-avy)
 (require 'init-auto-read-only)
+(require 'init-dired)
 
 ;;; init.el ends here
