@@ -79,6 +79,11 @@
   (interactive)
   (insert (shell-command-to-string "echo -n $(date \"+%Y-%m-%d %H:%M:%S\")")))
 
+;; ace-window
+(use-package ace-window
+  :ensure t
+  :bind ("C-x w" . ace-window))
+
 (provide 'init-basic)
 
 ;;; init-basic.el ends here
