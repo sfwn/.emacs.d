@@ -4,7 +4,9 @@
 
 ;; go-mode
 (use-package go-mode
-  :ensure t)
+  :ensure t
+  :config
+  (define-key go-mode-map (kbd "C-4") 'go-goto-function-name))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
