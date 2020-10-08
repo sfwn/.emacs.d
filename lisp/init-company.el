@@ -32,7 +32,7 @@
                                    gud-mode eshell-mode shell-mode)
         company-backends '((company-capf :with company-yasnippet)
                            (company-dabbrev-code company-keywords company-files)
-                           company-dabbrev))
+                           (company-dabbrev :separate company-tabnine)))
 
   (defun my-company-yasnippet ()
     "Hide the current completeions and show snippets."
@@ -146,6 +146,9 @@
              ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
       :hook (global-company-mode . company-quickhelp-mode)
       :init (setq company-quickhelp-delay 0.5)))))
+
+(use-package company-tabnine
+  :ensure t)
 
 (provide 'init-company)
 
