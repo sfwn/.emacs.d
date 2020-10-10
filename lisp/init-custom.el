@@ -4,7 +4,7 @@
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
-(setq-default find-function-C-source-directory '(expand-file-name "sources/27.1" user-emacs-directory))
+(setq-default find-function-C-source-directory (expand-file-name "sources/27.1/src" user-emacs-directory))
 
 ;; get md5 of action agent
 (defun get-action-agent-md5 (image)
