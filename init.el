@@ -4,10 +4,11 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(require 'cl)
+(require 'cl-lib)
 (require 'init-proxy)					; set proxy firstly
 (require 'init-package)
 (require 'init-custom)
+(require 'init-hydra)
 (require 'init-lsp)
 (require 'init-flycheck)
 (require 'init-go)

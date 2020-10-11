@@ -19,13 +19,13 @@
 		`(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
 		  ("http" . ,sfwn/http_proxy)
 		  ("https" . ,sfwn/http_proxy)))
-  (proxy-http-show))
+  (sfwn/proxy-http-show))
 
 (defun sfwn/proxy-http-disable ()
   "Disbale HTTP/HTTPS proxy."
   (interactive)
   (setq url-proxy-services nil)
-  (proxy-http-show))
+  (sfwn/proxy-http-show))
 
 (defun sfwn/proxy-http-toggle ()
   "Toggle HTTP/HTTPS proxy."
