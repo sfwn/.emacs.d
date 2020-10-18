@@ -15,7 +15,7 @@
 	(:pre nil
 	 :post (message "bye hydra")
 	 :color amaranth					; :foreign-keys warn :exit nil
-	 :quit-key "C-'")
+	 :quit-key "q")
 	("Window"
 	 (("w h" shrink-window-horizontally "←")
 	  ("w j" enlarge-window "↓")
@@ -36,7 +36,10 @@
 	  ("s v" (lambda() (interactive)
 			   (message "try to open vshell")
 			   (projectile-run-vterm)
-			   (hydra-keyboard-quit)) "vterm"))
+			   (hydra-keyboard-quit)) "vterm")
+	  ("c i" imenu "imenu")
+	  ("g b" magit-blame-echo)
+	  ("g c" magit-blame-cycle-style))
 	 "Emacs"
 	 (("e p" sfwn/proxy-http-toggle "proxy")))))
 
