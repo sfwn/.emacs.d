@@ -35,5 +35,7 @@
 (require 'init-avy)
 (require 'init-auto-read-only)
 (require 'init-dired)
+(require 'init-local)
+(require 'init-ibuffer)
 
 ;;; init.el ends here
