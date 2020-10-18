@@ -22,3 +22,4 @@ sources
 workspace
 eclipse.jdt.ls
 .extension
+lisp/init-local.el
