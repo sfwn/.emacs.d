@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+;; diminish
+(use-package diminish
+  :ensure t)
+
 ;; counsel
 (use-package counsel
   :ensure t
