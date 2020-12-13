@@ -8,7 +8,7 @@
 
 (use-package pretty-hydra
   :ensure t
-  :bind
+  :bind*
   ("C-'" . global-hydra/body)
   :config
   (pretty-hydra-define global-hydra
@@ -31,7 +31,8 @@
 	  ("b W" whitespace-cleanup "whitespace clean")
 	  ("b c" rainbow-mode "color" :toggle t)) ; #000000 #5F5A60 #CDA869 #red #blue
 	 "Coding"
-	 (("f" flycheck-mode "flycheck" :toggle t)
+	 (("v" evil-mode "evil mode")
+	  ("f" flycheck-mode "flycheck" :toggle t)
 	  ("s s" projectile-run-eshell "eshell")
 	  ("s v" (lambda() (interactive)
 			   (message "try to open vshell")
