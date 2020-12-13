@@ -11,8 +11,8 @@
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 
 ;; font
-(add-to-list 'default-frame-alist '(font . "-*-JetBrains Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1"))
-(set-face-attribute 'default t :font "-*-JetBrains Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+(add-to-list 'default-frame-alist '(font . "-*-JetBrains Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+(set-face-attribute 'default t :font "-*-JetBrains Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
 (global-hl-line-mode 1)
 
