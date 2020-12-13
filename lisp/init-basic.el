@@ -56,9 +56,6 @@
 
 (show-paren-mode 1)
 
-;; fold
-(add-hook 'prog-mode-hook 'hs-minor-mode)
-
 ;; line spacing
 (setq-default line-spacing 0.25)
 
@@ -83,6 +80,15 @@
 (use-package ace-window
   :ensure t
   :bind ("C-x w" . ace-window))
+
+(setq delete-by-moving-to-trash t)
+
+;; Delete selection if you insert
+(delete-selection-mode t)
+
+;; hide show
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+(global-set-key (kbd "C-`") 'hs-toggle-hiding)
 
 (provide 'init-basic)
 
