@@ -5,9 +5,10 @@
 (use-package treemacs
   :ensure t
   :config
-  (setq treemacs-position 'left)
-  (setq treemacs-follow-after-init t)
-  (setq treemacs-collapse-dirs 10)
+  (setq-default treemacs-position 'right)
+  (setq-default treemacs-width 50)
+  (setq-default treemacs-follow-after-init t)
+  (setq-default treemacs-collapse-dirs 10)
   (treemacs-git-mode 'deferred)
   (treemacs-filewatch-mode t)
   (treemacs-follow-mode nil)
