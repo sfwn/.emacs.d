@@ -29,6 +29,7 @@
 	  ("b l" display-line-numbers-mode "line num" :toggle t)
 	  ("b w" whitespace-mode "whitespace" :toggle t)
 	  ("b W" whitespace-cleanup "whitespace clean")
+	  ("b t" toggle-truncate-lines "truncate lines")
 	  ("b c" rainbow-mode "color" :toggle t)) ; #000000 #5F5A60 #CDA869 #red #blue
 	 "Coding"
 	 (("v" evil-mode "evil mode")
